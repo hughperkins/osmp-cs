@@ -1,0 +1,85 @@
+Next release:
+- world format changed to be inter-compatible between mono and .net
+- osmp shortcut added to setup project for windows
+- setup detects automatically whether to create shortcuts for mono or .net
+- added static methods LogFile.WriteLine( string ), LogFile.BlankLine() and LogFile.WriteLine( object )
+- replaced all Console.WriteLines with LogFile.WriteLines
+- layer1 keepalive packets now contain a byte of data -> fixed layer1 server disconnections
+- added STUN punch-through info to ServerInfo... dialog box
+- added new coordination key to config.xml with irc and stunserver configuration
+- added server registration
+- accelerated nant build
+- added scroll bars to chathistory pane in chatwindow
+- chathistory automatically scrolls to end on receipt of new message
+- added "Show users..." button to chat window
+- added "Show servers..." button to chat window
+- added remote server info dialog, with link from show servers dialog
+- changed default irc server to uk.quakenet.org b/c freenet doesnt allow anonymous private messages
+- "Connect" button added to "Show servers..." dialog box
+- "pingme" command added to xmlcommands
+- possible that this will work with port restricted NAT now, as well as full cone and restricted cone
+- changed world boundaries in config file from worldboundingbox to world node
+- changed near and far clip planes( near: 0.5 -> 10, far: 100 -> 2000)
+- world got a lot bigger
+- moved viewer state logic from Camera, PlayerMovement, Editing3d etc to ViewerState
+- added StateChanged event to ViewerState
+- press middle mousebutton for mouselook (configurable via config.xml)
+- context menu will only appear if no other keys pressed at same time
+- new context menu option: can now assign texture to all faces
+- new context menu option: can now assign color to all faces
+- paint splatted texture now works
+- change terrain height now works
+- serializing splatted terrain to/from xml now works (as long as you've saved blend textures, splattextures and heightmap first)
+- corrected bug in picker3dmodelgl that could lead to random crashes on a left mouse-click
+- setup works correctly again
+- osmp:// reactivated
+- corrected issue with terrain window not closing correctly
+- osmp now builds in visual studio (note:wont actually run with .net 2.0 at the moment)
+- corrected issue with world bounding box not being updated in playermovement after changing mapsize
+- removed CustomCollections from Metaverse.Utility
+- migrated Arguments to use generics (Metaverse.Utility)
+- nant build files now copy debugging information to output directory
+- context menu usage corrected; alt-tabbing now works correctly between child windows (fix bug http://manageddreams.com/osmpbugs/show_bug.cgi?id=11 )
+
+Release 0.4:
+- migrated context menu to GTK#
+- migrated entity properties box to GTK#
+- migrated renderer to standard SDL window
+- migrated chat box to GTK#
+- migrated chat login to GTK#
+- migrated many info/error dialog boxes to GTK#
+- improved keyboard processing algos
+- improved camera
+- added FrustrumCulling class
+- updated SDL dlls in Libraries folder
+- added SDL_imaging.dll to Libraries folder
+- added Metaverse.ico icon to SDL window
+- migrated all windows.forms items to use GTK#
+- migrated DevIl.Net to Tao.DevIl -> can compile on Mono now
+- can load/save worlds correctly now
+- can load worlds from web server url, including textures located on the webserver
+- corrected dirtyobject cache exception on client
+- corrected issue with repeated "received potential spoofed packet" when running integrated client/server
+- OSMP no longer needs working directory set to that of Metaverse.Client.exe
+- added Setup application, needs to run from same directory as Metaverse.Client.exe
+- added osmp:// protocol, so can open links like http://manageddreams.com/osmp/TestWorld/worldwithtexture.OSMP
+- added background loading for textures
+- added .osmp filetype, to directly open .osmp files
+- added non-modal messagebox at "UI/Dialogs/MessageBox.cs"
+- added Metaverse.ico icon to MessageBox.cs
+- readded Help|About; added compile date/time to help about
+- removed Avatar from serialization/deserialization, should alleviate world-loading issues
+- moved dynamic context menu items to top of context menu
+- removed list around cone drawing, correct rendering bug for position edit handles
+
+Release December 12 2006:
+- renamed "Properties" in context menu to "Edit"
+- activating Edit on an object automatically selects that object
+- added message box on selecting Edit with instructions for editing controls
+- entity modifications are now replicated to other connected clients, ie position,rot,scale,hollow,...
+- entity deletes are now replicated
+- "Delete" added to context menu
+- added ServerInfo dialog to obtain server port number
+- added "-serverport 1234" commandline option to change server port number (works with both client and server)
+- added "nochat" option to run without irc chat dialog
+- added Connect to Server dialog to connect to a different server

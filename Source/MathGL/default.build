@@ -1,0 +1,29 @@
+
+  <project name="MathGL" default="build" basedir=".">
+        <description>Compiles, cleans and exports the MathGL project</description>
+        <property name="debug" value="false" overwrite="false" />
+        
+		<target name="clean" description="remove all generated files">
+            <delete file="bin/MathGL.dll" failonerror="false" />
+            <delete file="bin/MathGL.pdb" failonerror="false" />
+        </target>
+
+        <target name="build_library" description="compiles the source code">
+            <csc target="library" output="bin/MathGL.dll" doc="bin/MathGL.xml" debug="${debug}">
+                <sources>
+                    <include name="GLVector.cs" />
+					<include name="GLMatrix.cs" />
+                </sources>
+            </csc>
+        </target>
+
+		<target name="document" description="documents the code after its been compiled">
+			<exec program="monodocer.bat" commandline="--assembly:MathGL.dll --importslashdoc:MathGL.xml --path../doc" workingdir="bin" />
+			<exec program="monodocs2html.bat" commandline="-source doc -dest:html" workingdir="." />
+        </target>
+
+		<target name="build" description="Build everything">
+			<call target="build_library" />
+		</target>
+    </project>
+

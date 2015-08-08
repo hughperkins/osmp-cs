@@ -1,0 +1,60 @@
+<root>
+
+	<client>
+		<display width="1024" height="768" />
+		<world x_size="256" y_size="256" mingroundheight="-5" maxgroundheight="50" ceiling="1000" />
+		<heightediting speed="0.04" defaultbrushsize="20" />
+		<movement acceleration="3" verticalmovespeed="2" movespeed="4" deceleration="1" turnspeed="0.25"/>
+  <keymappings description="keyboard mappings">
+    <keyreference>
+You can select a key value from any of the following values:
+Available keys are:
+a-z, 1-9, f1, f9,
+uparrow, leftarrow, rightarrow, downarrow,
+spacebar, shift, alt, ctrl, delete, enter
+    </keyreference>
+    <key command="quit" keycode="escape"/>
+
+	  <key command="moveleft" keycode="a"/>
+    <key command="moveleft" keycode="leftarrow"/>
+    <key command="moveright" keycode="d"/>
+    <key command="moveright" keycode="rightarrow"/>
+    <key command="moveforwards" keycode="w"/>
+    <key command="moveforwards" keycode="uparrow"/>
+    <key command="movebackwards" keycode="s"/>
+    <key command="movebackwards" keycode="downarrow"/>
+    <key command="moveup" keycode="e"/>
+    <key command="movedown" keycode="c"/>
+    
+	  <key command="mouselook" keycode="middlemousebutton" />
+	  <key command="camerazoom" keycode="alt" />
+	  <key command="cameraorbit" keycode="alt-ctrl"/>
+    <key command="camerapan" keycode="alt-shift-ctrl"/>
+    
+    <key command="editposition" keycode="z"/>
+    <key command="editscale" keycode="x"/>
+    <key command="editrotation" keycode="v"/>
+
+	  <key command="increaseheight" keycode="ctrl-leftmousebutton"/>
+	  <key command="decreaseheight" keycode="ctrl-rightmousebutton"/>
+
+	  <key command="selectobject" keycode="shift-leftmousebutton"/>
+    <key command="selectindividual" keycode="ctrl-leftmousebutton"/>
+    
+    <key command="delete" keycode="delete"/>
+    
+    <key command="help" keycode="f1"/>
+    <key command="toggleviewpoint" keycode="f9"/>
+    
+	  <key command="activatechat" keycode="enter"/>
+
+	  <key command="leftmousebutton" keycode="leftmousebutton" />
+  </keymappings>
+</client>
+<config debuglevel="3">
+</config>
+	<rem_coordination ircserver="irc.gamernet.org" ircport="6667" ircchannel="#osmp" stunserver="stun.fwdnet.net" />
+	<coordination ircserver="uk.quakenet.org" ircport="6667" ircchannel="#osmp" stunserver="stun.fwdnet.net" />
+	<server port="2501" ipaddress="127.0.0.1" >
+</server>
+</root>

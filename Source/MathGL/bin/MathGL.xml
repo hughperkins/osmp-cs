@@ -1,0 +1,556 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>H:\dev\osmpsvn\Trunk\Source\MathGL\bin\MathGL</name>
+    </assembly>
+    <members>
+        <member name="T:MathGl.GLMatrix4D">
+            <summary>
+            A 4D matrix for math calculations
+            </summary>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.#ctor(System.String)">
+            <summary>
+            Construct a matrix from string
+            </summary>
+            <param name="inputstring">String representation of a matrix</param>
+            <remarks>Row major order is expected to conform with standard output</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.#ctor">
+            <summary>
+            Create an uninitialized matrix
+            </summary>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.#ctor(System.Double)">
+            <summary>
+            Create an initialised matrix
+            </summary>
+            <param name="val">A value to initialize all fields of the matrix</param>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.#ctor(System.Double[])">
+            <summary>
+            Create a matrix from an array
+            </summary>
+            <param name="val">Array of values to initialize the matrix with</param>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.#ctor(MathGl.GLMatrix4D)">
+            <summary>
+            Copy a matrix
+            </summary>
+            <param name="mat">Source matrix to copy from</param>
+        </member>
+        <member name="F:MathGl.GLMatrix4D.m">
+            <summary>
+            Indices of our matrix
+            </summary>
+        </member>
+        <member name="P:MathGl.GLMatrix4D.Item(System.Int32)">
+            <summary>
+            Direct access to the matrix elements
+            </summary>
+            <remarks>just remember they are in column major format</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ToArray">
+            <summary>
+            Convert to matrix to an array of double values
+            </summary>
+            <returns>Array of the matrice's indicies</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.Det">
+            <summary>
+            Get the matrix determinant
+            </summary>
+            <returns>Determinant</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.adjoint">
+            <summary>
+            Get the adjoint matrix
+            </summary>
+            <returns>A new matrix that is adjoint to this one</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.inverse">
+            <summary>
+            Adjoint method inverse, constant time inversion implementation
+            </summary>
+            <returns>A new matrix that is inverse to this one</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.Equals(System.Object)">
+            <summary>
+            Equality function override
+            </summary>
+            <param name="twoobject">Matrix object</param>
+            <returns>True if they are equal, false otherwise</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.Multiply3By3(MathGl.GLMatrix4D)">
+            <summary>
+            Apply the matrix dot product to this matrix
+            </summary>
+            <param name="mat">Right Side Matrix</param>
+            <returns>This Matrix</returns>
+            <remarks>unrolling by sebastien bloc</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.Transpose">
+            <summary>
+            Transpose this matrix
+            </summary>
+            <returns>This matrix in transposed form</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.GetTranspose">
+            <summary>
+            Get a transposed matrix
+            </summary>
+            <returns>A new matrix that is the transposed form of this</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.Identity">
+            <summary>
+            Identity matrix
+            </summary>
+            <returns>A new identity matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.LoadIdentity">
+            <summary>
+            Make this an identity matrix
+            </summary>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.LoadRotate(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Make this an OpenGL rotation matrix
+            </summary>
+            <param name="angle">Angle of the rotation</param>
+            <param name="x">X value of the rotation vector</param>
+            <param name="y">Y value of the rotation vector</param>
+            <param name="z">Z value of the rotation vector</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.LoadRotateX(System.Double)">
+            <summary>
+            Make this an X rotation matrix
+            </summary>
+            <param name="angle">Angle of rotation</param>
+            <returns>This matrix</returns>
+            <remarks>Load rotate[X,Y,Z,XYZ] specialisations by sebastien bloc. Same as loadRotate(angle,1,0,0)</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.loadRotateY(System.Double)">
+            <summary>
+            Make this an Y rotation matrix
+            </summary>
+            <param name="angle">Angle of rotation</param>
+            <returns>This matrix</returns>
+            <remarks>Load rotate[X,Y,Z,XYZ] specialisations by sebastien bloc. Same as loadRotate(angle,0,1,0)</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.loadRotateZ(System.Double)">
+            <summary>
+            Make this an Z rotation matrix
+            </summary>
+            <param name="angle">Angle of rotation</param>
+            <returns>This matrix</returns>
+            <remarks>Load rotate[X,Y,Z,XYZ] specialisations by sebastien bloc. Same as loadRotate(angle,0,0,1)</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.applyRotate(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Apply a rotation to this matrix
+            </summary>
+            <param name="angle">Angle of rotation</param>
+            <param name="x">X value of the rotation vector</param>
+            <param name="y">Y value of the rotation vector</param>
+            <param name="z">Z value of the rotation vector</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyRotateX(System.Double)">
+            <summary>
+            Apply a X rotation to this matrix
+            </summary>
+            <param name="angle">Angle of rotation</param>
+            <returns>This matrix</returns>
+            <remarks>Apply rotate[X,Y,Z,XYZ] specialisations by sebastien bloc</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyRotateY(System.Double)">
+            <summary>
+            Apply a Y rotation to this matrix
+            </summary>
+            <param name="angle">Angle of rotation</param>
+            <returns>This matrix</returns>
+            <remarks>Apply rotate[X,Y,Z,XYZ] specialisations by sebastien bloc</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyRotateZ(System.Double)">
+            <summary>
+            Apply a Z rotation to this matrix
+            </summary>
+            <param name="angle">Angle of rotation</param>
+            <returns>This matrix</returns>
+            <remarks>Apply rotate[X,Y,Z,XYZ] specialisations by sebastien bloc</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyRotateXYZ(System.Double,System.Double,System.Double)">
+            <summary>
+            Apply a XYZ rotation to this matrix
+            </summary>
+            <param name="angle">Angle of rotation around X axis</param>
+            <param name="angle">Angle of rotation around Y axis</param>
+            <param name="angle">Angle of rotation around Z axis</param>
+            <returns>This matrix</returns>
+            <remarks>Apply rotate[X,Y,Z,XYZ] specialisations by sebastien bloc</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.LoadScale(System.Double,System.Double,System.Double)">
+            <summary>
+            Make this an OpenGL scale matrix
+            </summary>
+            <param name="x">X scale value</param>
+            <param name="y">Y scale value</param>
+            <param name="z">Z scale value</param>
+            <returns>This Matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyScale(System.Double,System.Double)">
+            <summary>
+            Apply an XY scale to this matrix
+            </summary>
+            <param name="x">X scale value</param>
+            <param name="y">Y scale value</param>
+            <returns>This Matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyScale(System.Double,System.Double,System.Double)">
+            <summary>
+            Apply an XYZ scale to this matrix
+            </summary>
+            <param name="x">X scale value</param>
+            <param name="y">Y scale value</param>
+            <param name="z">Z scale value</param>
+            <returns>This Matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyScale(MathGl.GLVector2d)">
+            <summary>
+            Apply an XY scale vector to this matrix
+            </summary>
+            <param name="scale">2D scale vector</param>
+            <returns>This Matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.applyScale(MathGl.GLVector3d)">
+            <summary>
+            Apply an XYZ scale vector to this matrix
+            </summary>
+            <param name="scale">3D scale vector</param>
+            <returns>This Matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.LoadTranslation(System.Double,System.Double,System.Double)">
+            <summary>
+            Make this a translation matrix
+            </summary>
+            <param name="x">X translation</param>
+            <param name="y">Y translation</param>
+            <param name="z">Z translation</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyTranslation(System.Double,System.Double)">
+            <summary>
+            Apply a XY translation to this matrix
+            </summary>
+            <param name="x">X translation</param>
+            <param name="y">Y translation</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyTranslation(System.Double,System.Double,System.Double)">
+            <summary>
+            Apply a XY translation to this matrix
+            </summary>
+            <param name="x">X translation</param>
+            <param name="y">Y translation</param>
+            <param name="z">Z translation</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ApplyTranslation(MathGl.GLVector2d)">
+            <summary>
+            Apply a XY translation to this matrix
+            </summary>
+            <param name="trans">2D vector</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.applyTranslate(MathGl.GLVector3d)">
+            <summary>
+            Apply a XYZ translation to this matrix
+            </summary>
+            <param name="trans">3D vector</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.glFrustrum(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Create a frustrum matrix
+            </summary>
+            <param name="left">Left value</param>
+            <param name="right">Right value</param>
+            <param name="bottom">Bottom value</param>
+            <param name="top">Top value</param>
+            <param name="zNear">Near z plane distance</param>
+            <param name="zFar">Far z plane distance</param>
+            <returns>Frustrum matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.LoadFrustum(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Make this a frustrum matrix
+            </summary>
+            <param name="left">Left value</param>
+            <param name="right">Right value</param>
+            <param name="bottom">Bottom value</param>
+            <param name="top">Top value</param>
+            <param name="zNear">Near z plane distance</param>
+            <param name="zFar">Far z plane distance</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.Orthogonal(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Make an orthogonal matrix
+            </summary>
+            <param name="left">Left value</param>
+            <param name="right">Right value</param>
+            <param name="bottom">Bottom value</param>
+            <param name="top">Top value</param>
+            <param name="zNear">Near z plane distance</param>
+            <param name="zFar">Far z plane distance</param>
+            <returns>Frustrum matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.LoadOrthogonal(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Make this an orthogonal matrix
+            </summary>
+            <param name="left">Left value</param>
+            <param name="right">Right value</param>
+            <param name="bottom">Bottom value</param>
+            <param name="top">Top value</param>
+            <param name="zNear">Near z plane distance</param>
+            <param name="zFar">Far z plane distance</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.LoadView(MathGl.GLVector3d,MathGl.GLVector3d,MathGl.GLVector3d)">
+            <summary>
+            Make this a view matrix
+            </summary>
+            <param name="front">Front vector</param>
+            <param name="up">Up vector</param>
+            <param name="side">Side vector</param>
+            <returns>This matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.ToString">
+            <summary>
+            Get a string version of this matrix
+            </summary>
+            <returns>String representation</returns>
+            <remarks>Row major order is expected to conform with standard input</remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorHelper(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Helper function for creating cofactors
+            </summary>
+            <param name="f1">Factor 1</param>
+            <param name="mj1">Major 1</param>
+            <param name="mi1">Minor 1</param>
+            <param name="f2">Factor 2</param>
+            <param name="mj2">Major 2</param>
+            <param name="mi2">Minor 2</param>
+            <param name="f3">Factor 3</param>
+            <param name="mj3">Major 3</param>
+            <param name="mi3">Minor 3</param>
+            <returns>Cofactor</returns>
+            <remarks>
+            Cofactor maker after the looping determinant theory I'm sure we all learnt in high-school
+            *  factor1 |   ^          |
+            *  ------------|----------v----
+            *          | major   |
+            *          |         |  minor
+            *              ^          |
+            *  factor2 |   |          |
+            *  ------------|----------v----
+            *          | major   |
+            *          |         |  minor
+            *              ^          |
+            *  factor3 |   |          |
+            *  ------------|----------v----
+            *          | major   |
+            *          |         |  minor
+            *              ^          |
+            *              |          v
+            </remarks>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM0">
+            <summary>
+            Cofactor of m[0]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM1">
+            <summary>
+            Cofactor of m[1]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM2">
+            <summary>
+            Cofactor of m[2]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM3">
+            <summary>
+            Cofactor of m[3]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM4">
+            <summary>
+            Cofactor of m[4]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM5">
+            <summary>
+            Cofactor of m[5]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM6">
+            <summary>
+            Cofactor of m[6]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM7">
+            <summary>
+            Cofactor of m[7]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM8">
+            <summary>
+            Cofactor of m[8]
+            </summary>
+            <returns>
+            </returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM9">
+            <summary>
+            Cofactor of m[9]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM10">
+            <summary>
+            Cofactor of m[10]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM11">
+            <summary>
+            Cofactor of m[11]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM12">
+            <summary>
+            Cofactor of m[12]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM13">
+            <summary>
+            Cofactor of m[13]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM14">
+            <summary>
+            Cofactor of m[14]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.CofactorM15">
+            <summary>
+            Cofactor of m[15]
+            </summary>
+            <returns>Cofactor</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.GetHashCode">
+            <summary>
+            Get the hashcode of this matrix
+            </summary>
+            <returns>Integer hashcode</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Equality(MathGl.GLMatrix4D,MathGl.GLMatrix4D)">
+            <summary>
+            Equality check.
+            </summary>
+            <param name="one">First Matrix</param>
+            <param name="two">Second Matrix</param>
+            <returns>True if they are equal, false otherwise</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Inequality(MathGl.GLMatrix4D,MathGl.GLMatrix4D)">
+            <summary>
+            dot net requires we also define !=
+            </summary>
+            <param name="one">First Matrix</param>
+            <param name="two">Second Matrix</param>
+            <returns>True if they are not equal, false otherwise</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Multiply(MathGl.GLMatrix4D,System.Double)">
+            <summary>
+            Multiply this matrix by a scalar
+            </summary>
+            <param name="mat">Matrix</param>
+            <param name="val">Scalar</param>
+            <returns>New resulting matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Multiply(System.Double,MathGl.GLMatrix4D)">
+            <summary>
+            Multiply this matrix by a scalar
+            </summary>
+            <param name="val">Scalar</param>
+            <param name="mat">Matrix</param>
+            <returns>New resulting matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Division(MathGl.GLMatrix4D,System.Double)">
+            <summary>
+            Divide this matrix by a scalar
+            </summary>
+            <param name="mat">Matrix</param>
+            <param name="val">Scalar</param>
+            <returns>New resulting matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Addition(MathGl.GLMatrix4D,MathGl.GLMatrix4D)">
+            <summary>
+            Add two matrices together
+            </summary>
+            <param name="one">Left Matrix</param>
+            <param name="two">Right Matrix</param>
+            <returns>New resulting matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Subtraction(MathGl.GLMatrix4D,MathGl.GLMatrix4D)">
+            <summary>
+            Subtract one matrix from another
+            </summary>
+            <param name="one">Left Matrix</param>
+            <param name="two">Right Matrix</param>
+            <returns>New resulting matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Multiply(MathGl.GLMatrix4D,MathGl.GLMatrix4D)">
+            <summary>
+            Get the matrix dot product, the most commonly used form of matrix multiplication
+            </summary>
+            <param name="one">Left Matrix</param>
+            <param name="two">Right Matrix</param>
+            <returns>New resulting matrix</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Multiply(MathGl.GLMatrix4D,MathGl.GLVector4d)">
+            <summary>
+            Get the matrix vector dot product, used to transform vertices
+            </summary>
+            <param name="mat">Left Side Matrix</param>
+            <param name="vec">Right Side Vector</param>
+            <returns>Resulting Vector</returns>
+        </member>
+        <member name="M:MathGl.GLMatrix4D.op_Multiply(MathGl.GLMatrix4D,MathGl.GLVector3d)">
+            <summary>
+            Get the matrix vector dot product with w = 1, use for transforming non 4D vectors
+            </summary>
+            <param name="mat">Left Side Matrix</param>
+            <param name="vec">Right Side Vector</param>
+            <returns>Resulting  vector</returns>
+        </member>
+    </members>
+</doc>

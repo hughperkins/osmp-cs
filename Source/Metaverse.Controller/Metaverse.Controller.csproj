@@ -1,0 +1,56 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Metaverse.Controller</RootNamespace>
+    <AssemblyName>Metaverse.Controller</AssemblyName>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47B69A89-67A5-450F-A72D-9AD1F14FEC10}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>..\..\Outputs\net-2.0\Metaverse.Controller\</OutputPath>
+    <Optimize>False</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <Optimize>True</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Nini">
+      <HintPath>..\..\Libraries\Nini.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClientController.cs" />
+    <Compile Include="PluginController.cs" />
+    <Compile Include="ServerController.cs" />
+    <Compile Include="Collections\ClientControllers.cs" />
+    <Compile Include="Collections\ServerControllers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Metaverse.Client\Metaverse.Client.csproj">
+      <Project>{B43DFCEC-2F68-4108-A83C-A02A773FD8CB}</Project>
+      <Name>Metaverse.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metaverse.Utility\Metaverse.Utility.csproj">
+      <Project>{3F3F41CF-D45F-457E-B810-078180AB68C1}</Project>
+      <Name>Metaverse.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metaverse.Common\Metaverse.Common.csproj">
+      <Project>{8DF2285B-E8C6-4D1C-BB51-F85BBE080073}</Project>
+      <Name>Metaverse.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

@@ -1,0 +1,18 @@
+<project default="build" basedir=".">
+
+	<if test="${framework::get-target-framework()=='net-2.0'}">
+		<property name="outputdir" value="../../Outputs/net-2.0"/>
+	</if>
+	<if test="${framework::get-target-framework()=='mono-2.0'}">
+		<property name="outputdir" value="../../Outputs/mono-2.0"/>
+	</if>   
+
+   <target name="build">
+       <mkdir dir="${outputdir}/stun4cs" />
+       <csc target="library" output="${outputdir}/stun4cs/stun4cs.dll">
+           <sources>
+                <include name="*.cs" />               
+           </sources>
+       </csc>
+   </target>
+</project>

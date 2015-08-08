@@ -1,0 +1,88 @@
+<project name="Metaverse.Networking" default="build" basedir=".">
+	<description>Compiles, cleans and exports the Metaverse.Networking Project</description>
+	<property name="debug" value="true" overwrite="false" />
+
+	<if test="${framework::get-target-framework()=='net-2.0'}">
+		<property name="outputdir" value="../../Outputs/net-2.0"/>
+		<property name="bindir" value="bin/net-2.0"/>
+	</if>
+	<if test="${framework::get-target-framework()=='mono-2.0'}">
+		<property name="outputdir" value="../../Outputs/mono-2.0"/>
+		<property name="bindir" value="bin/mono-2.0"/>
+	</if>
+
+	<target name="clean" description="remove all generated files">
+		<echo message="Metaverse.Networking build running clean" />
+		<nant buildfile="../Metaverse.Utility/default.build" target="clean" />
+		<nant buildfile="../NetworkInterfaces/default.build" target="clean" /> 
+		<delete failonerror="false">
+			<fileset basedir="${bindir}">
+				<include name="*" />
+			</fileset>
+		</delete>
+		<delete failonerror="false">
+			<fileset basedir="${outputdir}/Metaverse.Networking">
+				<include name="*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build" description="compiles the source code">
+		<echo message="Metaverse.Networking build running build" />
+
+    	<nant buildfile="../Metaverse.Utility/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Utility">
+				<include name="Metaverse.Utility.*"/>
+			</fileset>
+		</copy>
+        
+		<nant buildfile="../stun4cs/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/stun4cs">
+				<include name="stun4cs.*"/>
+			</fileset>
+		</copy>
+        
+		<nant buildfile="../NetworkInterfaces/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/NetworkInterfaces">
+				<include name="NetworkInterfaces.*"/>
+			</fileset>
+		</copy>
+
+		<csc target="library" output="${bindir}/Metaverse.Networking.dll" debug="${debug}">
+			<references>
+				<include name="${bindir}/NetworkInterfaces.dll" />
+				<include name="${bindir}/Metaverse.Utility.dll" />
+				<include name="${bindir}/stun4cs.dll" />
+			</references>
+
+			<sources>
+	
+				<include name="./Layer1_Implementation/NetworkImplementationFactory.cs" />
+				<include name="./Layer1_Implementation/INetworkImplementation.cs" />
+				<include name="./Layer1_Implementation/UDP/NetworkImplementationUdp.cs" />
+				<include name="./Layer4_Rpc/RpcController.cs" />
+				<include name="./Layer4_Rpc/GeneratedProxies/TestInterface_ClientProxy_Generated.cs" />
+				<include name="./Layer4_Rpc/GeneratedProxies/WorldControl_ClientProxy_Generated.cs" />
+				<include name="./Layer4_Rpc/GeneratedProxies/ObjectReplicationClientToServer_ClientProxy_Generated.cs" />
+				<include name="./Layer4_Rpc/GeneratedProxies/ObjectReplicationServerToClient_ClientProxy_Generated.cs" />
+				<include name="./Layer2_Connection/NetPacketReferenceController.cs" />
+				<include name="./Layer2_Connection/NetworkLevel2Connection.cs" />
+				<include name="./Layer2_Connection/NetSharedSecretExchange.cs" />
+				<include name="./Layer2_Connection/NetworkLevel2Controller.cs" />
+				<include name="./STUN/STUN.cs" />
+
+			</sources>
+		</csc>
+		
+		<copy todir="${outputdir}/Metaverse.Networking">
+			<fileset basedir="${bindir}">
+				<include name="*"/>
+			</fileset>
+		</copy>
+
+	</target>
+</project>
+

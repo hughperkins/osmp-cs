@@ -1,0 +1,7 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# SharpDevelop 2.1.0.2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metaverse.Scripting.Testing", "Metaverse.Scripting.Testing.csproj", "{19AF96A4-C8F9-4131-9A8A-69EA468EC969}"
+EndProject
+Global
+EndGlobal

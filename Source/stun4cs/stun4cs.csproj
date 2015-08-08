@@ -1,0 +1,81 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F1439D3-88D8-47FF-996C-8D2062AB4016}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>stun4cs</RootNamespace>
+    <AssemblyName>stun4cs</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Outputs\net-2.0\stun4cs\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressAttribute.cs" />
+    <Compile Include="Attribute.cs" />
+    <Compile Include="AttributeDecoder.cs" />
+    <Compile Include="AttributeFactory.cs" />
+    <Compile Include="BlockingRequestSender.cs" />
+    <Compile Include="ChangedAddressAttribute.cs" />
+    <Compile Include="ChangeRequestAttribute.cs" />
+    <Compile Include="ErrorCodeAttribute.cs" />
+    <Compile Include="ErrorHandler.cs" />
+    <Compile Include="InetSocketAddress.cs" />
+    <Compile Include="MappedAddressAttribute.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageEventHandler.cs" />
+    <Compile Include="MessageFactory.cs" />
+    <Compile Include="MessageProcessor.cs" />
+    <Compile Include="MessageQueue.cs" />
+    <Compile Include="MyUdpClient.cs" />
+    <Compile Include="NetAccessManager.cs" />
+    <Compile Include="NetAccessPoint.cs" />
+    <Compile Include="NetAccessPointDescriptor.cs" />
+    <Compile Include="NetworkConfigurationDiscoveryProcess.cs" />
+    <Compile Include="RawMessage.cs" />
+    <Compile Include="ReflectedFromAttribute.cs" />
+    <Compile Include="Request.cs" />
+    <Compile Include="RequestListener.cs" />
+    <Compile Include="Response.cs" />
+    <Compile Include="ResponseAddressAttribute.cs" />
+    <Compile Include="ResponseCollector.cs" />
+    <Compile Include="SimpleAddressDetector.cs" />
+    <Compile Include="SourceAddressAttribute.cs" />
+    <Compile Include="StunAddress.cs" />
+    <Compile Include="StunClientTransaction.cs" />
+    <Compile Include="StunDiscoveryReport.cs" />
+    <Compile Include="StunException.cs" />
+    <Compile Include="StunMessageEvent.cs" />
+    <Compile Include="StunProvider.cs" />
+    <Compile Include="StunStack.cs" />
+    <Compile Include="TransactionID.cs" />
+    <Compile Include="UnknownAttributesAttribute.cs" />
+    <None Include="default.build" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

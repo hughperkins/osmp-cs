@@ -1,0 +1,30 @@
+<project name="RpcProxyGenerator" default="build" basedir=".">
+	<if test="${framework::get-target-framework()=='net-2.0'}">
+		<property name="outputdir" value="../../Outputs/net-2.0"/>
+	</if>
+	<if test="${framework::get-target-framework()=='mono-2.0'}">
+		<property name="outputdir" value="../../Outputs/mono-2.0"/>
+	</if>
+
+	<target name="clean" description="remove all generated files">
+			<delete>
+				<fileset basedir="../../Outputs/RpcProxyGenerator">
+					<include name="*" />
+				</fileset>
+			</delete>
+        </target>
+
+    <target name="build" description="compiles the source code">
+		<mkdir dir="${outputdir}/RpcProxyGenerator" />
+        <csc target="exe" output="${outputdir}/RpcProxyGenerator/RpcProxyGenerator.exe" debug="${debug}">
+            <references>
+                <include name="${outputdir}/NetworkInterfaces/NetworkInterfaces.dll" />
+            </references>
+            <sources>
+                <include name="EntryPoint.cs" />
+                <include name="NetworkProxyBuilder.cs" />
+                <include name="RunGenerator.cs" />
+            </sources>
+        </csc>
+    </target>
+</project>

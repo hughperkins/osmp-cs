@@ -1,0 +1,65 @@
+
+  <project name="FractalSpline" default="build" basedir=".">
+        <description>Compiles, cleans and exports the FractalSpline project</description>
+        <property name="debug" value="false" overwrite="false" />
+        
+		<target name="clean" description="remove all generated files">
+			<delete>
+				<fileset basedir="bin">
+					<include name="*" />
+				</fileset>
+			</delete>
+        </target>
+
+        <target name="build_library" description="compiles the source code">
+			<nant buildfile="../MathGL/default.build" />
+            <copy todir="bin">
+			    <fileset basedir="../MathGL/bin/">
+					<include name="MathGL.dll"/>
+				</fileset>
+			</copy>
+			<copy todir="bin">
+				<fileset basedir="../../Libraries">
+					<include name="Tao.OpenGl.dll"/>
+					<include name="Tao.OpenGl.ExtensionLoader.dll" />
+					<include name="Tao.OpenGl.Glu.dll" />
+				</fileset>
+			</copy>
+			<csc target="library" output="bin/FractalSpline.dll" debug="${debug}">
+				<references>
+					<include name="bin/MathGL.dll"/>
+					<include name="bin/Tao.OpenGl.dll"/>
+					<include name="bin/Tao.OpenGl.Glu.dll"/>
+					<include name="System.Drawing.dll"/>
+				</references>
+                <sources>
+                    <include name="Box.cs" />
+					<include name="Color.cs" />
+					<include name="CrossSection.cs" />
+					<include name="Cylinder.cs" />
+					<include name="ExtrusionPath.cs" />
+					<include name="Face.cs" />
+					<include name="IRenderer.cs" />
+					<include name="LinearExtrusionPath.cs" />
+					<include name="LinearPrimitive.cs" />
+					<include name="Primitive.cs" />
+					<include name="Prism.cs" />
+					<include name="RendererOpenGL.cs" />
+					<include name="Ring.cs" />
+					<include name="RotationalExtrusionPath.cs" />
+					<include name="RotationalPrimitive.cs" />
+					<include name="TextureHelper.cs" />
+					<include name="TextureMapping.cs" />
+					<include name="Torus.cs" />
+					<include name="Tube.cs" />
+					<include name="Vector2.cs" />
+					<include name="Vector3.cs" />
+                </sources>
+            </csc>
+        </target>
+
+		<target name="build" description="Build everything">
+			<call target="build_library" />
+		</target>
+    </project>
+

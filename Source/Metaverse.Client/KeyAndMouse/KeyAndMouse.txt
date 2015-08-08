@@ -1,0 +1,28 @@
+keyandmouse provides events and caching for key and mouse events.
+
+There are several layers of abstraction:
+
+- bottom keyboard layer is SdlKeyCache, which just stores sdl key codes
+- bottom mouse layer is mousecache, which stores mouse position and button states
+
+- next is KeyNameCache, which subscribes to both SDlKeyCache and MouseCache.
+  It converts the keycodes and mousebutton codes into standardized, 
+  implementation-independent keyname strings.  left mouse button becomes "leftmousebutton"
+  
+- KeyCombos subscribes to KeyNameCache.  It reads the key commands from the config class.
+  Any time a combo matches, a down event is fired for that combo.  The combo stays down
+  as long as those keys are pressed, even if additional keys are present.  When that
+  combo is no longer pressed, an Up event is sent
+  
+- CommandCombos is the highest-level keyboard abstraction.  You can register a group
+  of commands (from the config.xml).  These commands are mutually-exclusive, ie if
+  a command matches, but another command matches, and matches better, only the second
+  one will be considered down.
+
+For mouse events, we have an additional abstraction:
+
+- MouseMoveConfigMappings.  Abstracts mouse movement, so that the config file can
+  map mouse up-down to vertical movement, but the config file could equally
+  map the scrollwheel to vertical movement instead.
+
+Note that Layer2MouseEvents is not currently either used or implemented

@@ -1,0 +1,71 @@
+<project name="Metaverse.Utility_Testing" default="build" basedir=".">
+	<description>Compiles, cleans and exports the Metaverse.Utility_Testing Project</description>
+	<property name="debug" value="true" overwrite="false" />
+
+	<if test="${framework::get-target-framework()=='net-2.0'}">
+		<property name="outputdir" value="../../Outputs/net-2.0"/>
+		<property name="bindir" value="bin/net-2.0"/>
+	</if>
+	<if test="${framework::get-target-framework()=='mono-2.0'}">
+		<property name="outputdir" value="../../Outputs/mono-2.0"/>
+		<property name="bindir" value="bin/mono-2.0"/>
+	</if>
+
+	<target name="clean" description="remove all generated files">
+		<echo message="Metaverse.Utility_Testing build running clean" />
+		
+		<delete failonerror="false">
+			<fileset basedir="${bindir}">
+				<include name="*" />
+			</fileset>
+		</delete>
+		<delete failonerror="false">
+			<fileset basedir="${outputdir}/Metaverse.Utility_Testing">
+				<include name="*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build" description="compiles the source code">
+		<echo message="Metaverse.Utility_Testing build running build" />
+		<copy todir="${bindir}">
+			<fileset basedir="../../Libraries">
+				<include name="nunit.framework.dll"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Metaverse.Utility/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Utility">
+				<include name="Metaverse.Utility.dll"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Metaverse.Client/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Client">
+				<include name="*.dll"/>
+			</fileset>
+		</copy>
+
+
+		<csc target="library" output="${bindir}/Metaverse.Utility_Testing.dll" debug="${debug}">
+			<references>
+				<include name="${bindir}/nunit.framework.dll" />
+				<include name="${bindir}/Metaverse.Utility.dll" />
+				<include name="${bindir}/Metaverse.Client.dll" />
+			</references>
+			<sources>
+				<include name="./*.cs" />
+			</sources>
+		</csc>
+		
+		<copy todir="${outputdir}/Metaverse.Utility_Testing">
+			<fileset basedir="${bindir}">
+				<include name="*"/>
+			</fileset>
+		</copy>
+
+	</target>
+</project>
+

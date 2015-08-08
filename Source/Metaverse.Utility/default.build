@@ -1,0 +1,48 @@
+<project name="Metaverse.Utility" default="build" basedir=".">
+	<description>Compiles, cleans and exports the Metaverse.Utility Project</description>
+	<property name="debug" value="true" overwrite="false" />
+
+	<if test="${framework::get-target-framework()=='net-2.0'}">
+		<property name="outputdir" value="../../Outputs/net-2.0"/>
+		<property name="bindir" value="bin/net-2.0"/>
+	</if>
+	<if test="${framework::get-target-framework()=='mono-2.0'}">
+		<property name="outputdir" value="../../Outputs/mono-2.0"/>
+		<property name="bindir" value="bin/mono-2.0"/>
+	</if>
+
+	<target name="clean" description="remove all generated files">
+		<echo message="Metaverse.Utility build running clean" />
+		
+		<delete failonerror="false">
+			<fileset basedir="${bindir}">
+				<include name="*" />
+			</fileset>
+		</delete>
+		<delete failonerror="false">
+			<fileset basedir="${outputdir}/Metaverse.Utility">
+				<include name="*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build" description="compiles the source code">
+		<echo message="Metaverse.Utility build running build" />
+
+		<csc target="library" output="${bindir}/Metaverse.Utility.dll" debug="${debug}">
+			<sources>
+	
+				<include name="./*.cs" />
+
+			</sources>
+		</csc>
+		
+		<copy todir="${outputdir}/Metaverse.Utility">
+			<fileset basedir="${bindir}">
+				<include name="*"/>
+			</fileset>
+		</copy>
+
+	</target>
+</project>
+

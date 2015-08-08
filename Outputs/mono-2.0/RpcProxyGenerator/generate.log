@@ -1,0 +1,24 @@
+We will create proxy classes that will run methods on class TestInterface on the server
+Server class will need to have constructor with parameters ( Connection connection )
+
+TestInterface_ClientProxy_Generated.cs generated
+We will create proxy classes that will run methods on class LockRpcToClient on the server
+Server class will need to have constructor with parameters ( Connection connection )
+
+LockRpcToClient_ClientProxy_Generated.cs generated
+We will create proxy classes that will run methods on class LockRpcToServer on the server
+Server class will need to have constructor with parameters ( Connection connection )
+
+LockRpcToServer_ClientProxy_Generated.cs generated
+We will create proxy classes that will run methods on class ObjectReplicationClientToServer on the server
+Server class will need to have constructor with parameters ( Connection connection )
+
+ObjectReplicationClientToServer_ClientProxy_Generated.cs generated
+We will create proxy classes that will run methods on class ObjectReplicationServerToClient on the server
+Server class will need to have constructor with parameters ( Connection connection )
+
+ObjectReplicationServerToClient_ClientProxy_Generated.cs generated
+We will create proxy classes that will run methods on class WorldControl on the server
+Server class will need to have constructor with parameters ( Connection connection )
+
+WorldControl_ClientProxy_Generated.cs generated

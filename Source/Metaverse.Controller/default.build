@@ -1,0 +1,79 @@
+<project name="Metaverse.Controller" default="build" basedir=".">
+	<description>Compiles, cleans and exports the Metaverse.Controller Project</description>
+	<property name="debug" value="true" overwrite="false" />
+
+	<if test="${framework::get-target-framework()=='net-2.0'}">
+		<property name="outputdir" value="../../Outputs/net-2.0"/>
+		<property name="bindir" value="bin/net-2.0"/>
+	</if>
+	<if test="${framework::get-target-framework()=='mono-2.0'}">
+		<property name="outputdir" value="../../Outputs/mono-2.0"/>
+		<property name="bindir" value="bin/mono-2.0"/>
+	</if>
+
+	<target name="clean" description="remove all generated files">
+		<echo message="Metaverse.Controller build running clean" />
+		<nant buildfile="../Metaverse.Utility/default.build" target="clean" />
+		<nant buildfile="../Metaverse.Common/default.build" target="clean" />
+		<nant buildfile="../Metaverse.Client/default.build" target="clean" />
+		<delete failonerror="false">
+			<fileset basedir="${bindir}">
+				<include name="*" />
+			</fileset>
+		</delete>
+		<delete failonerror="false">
+			<fileset basedir="${outputdir}/Metaverse.Controller">
+				<include name="*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build" description="compiles the source code">
+		<echo message="Metaverse.Controller build running build" />
+		<copy todir="${bindir}">
+			<fileset basedir="../../Libraries">
+				<include name="Nini.dll"/>
+			</fileset>
+		</copy>
+      
+		<nant buildfile="../Metaverse.Utility/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Utility">
+				<include name="Metaverse.Utility.*"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Metaverse.Common/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Common">
+				<include name="Metaverse.Common.*"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Metaverse.Client/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Client">
+				<include name="*.*"/>
+			</fileset>
+		</copy>
+
+		<csc target="library" output="${bindir}/Metaverse.Controller.dll" debug="${debug}">
+			<references>
+				<include name="${bindir}/Metaverse.Common.dll" />
+				<include name="${bindir}/Metaverse.Utility.dll" />
+				<include name="${bindir}/Metaverse.Client.dll" />
+				<include name="${bindir}/Nini.dll" />
+			</references>
+			<sources>
+				<include name="./*.cs" />
+				<include name="./Collections/*.cs" />
+			</sources>
+		</csc>
+		<copy todir="${outputdir}/Metaverse.Controller">
+			<fileset basedir="${bindir}">
+				<include name="*"/>
+			</fileset>
+		</copy>
+	</target>
+</project>
+

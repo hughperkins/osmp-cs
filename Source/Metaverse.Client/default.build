@@ -1,0 +1,326 @@
+<project name="Metaverse.Client" default="build" basedir=".">
+	<description>Compiles, cleans and exports the Metaverse.ClientProject</description>
+	<property name="debug" value="true" overwrite="false" />
+
+	<if test="${framework::get-target-framework()=='net-2.0'}">
+		<property name="outputdir" value="../../Outputs/net-2.0"/>
+		<property name="bindir" value="bin/net-2.0"/>
+	</if>
+	<if test="${framework::get-target-framework()=='mono-2.0'}">
+		<property name="outputdir" value="../../Outputs/mono-2.0"/>
+		<property name="bindir" value="bin/mono-2.0"/>
+	</if>
+
+	<target name="clean" description="remove all generated files">
+		<echo message="MetaverseClient.build running clean" />
+		<nant buildfile="../FractalSpline/default.build" target="clean" />
+		<nant buildfile="../NetworkInterfaces/default.build" target="clean" />
+		<nant buildfile="../RpcProxyGenerator/default.build" target="clean" />
+		<nant buildfile="../Metaverse.Common/default.build" target="clean" />
+		<nant buildfile="../Metaverse.Utility/default.build" target="clean" />
+		<nant buildfile="../Metaverse.Communication/default.build" target="clean" />
+		<nant buildfile="../Metaverse.Networking/default.build" target="clean" />
+		<delete failonerror="false">
+			<fileset basedir="${bindir}">
+				<include name="*" />
+			</fileset>
+		</delete>
+		<delete failonerror="false">
+			<fileset basedir="${outputdir}/Metaverse.Client">
+				<include name="*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build" description="compiles the source code">
+		<echo message="MetaverseClient.build running build" />
+		<copy todir="${bindir}">
+			<fileset basedir="../../Libraries">
+				<include name="*.*"/>
+			</fileset>
+		</copy>
+        
+		<nant buildfile="../FractalSpline/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="../FractalSpline/bin/">
+				<include name="MathGL.*"/>
+				<include name="Tao.OpenGl.dll"/>
+				<include name="Tao.OpenGl.Glu.dll"/>
+				<include name="Tao.OpenGl.ExtensionLoader.dll"/>
+				<include name="FractalSpline.*"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Metaverse.Utility/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Utility">
+				<include name="Metaverse.Utility.*"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Metaverse.Communication/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Communication">
+				<include name="Metaverse.Communication.*"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Metaverse.Common/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Common">
+				<include name="Metaverse.Common.*"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Metaverse.Networking/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/Metaverse.Networking">
+				<include name="Metaverse.Networking.*"/>
+			</fileset>
+		</copy>
+        
+		<nant buildfile="../stun4cs/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/stun4cs">
+				<include name="stun4cs.*"/>
+			</fileset>
+		</copy>
+        
+		<nant buildfile="../NetworkInterfaces/default.build" />
+		<copy todir="${bindir}">
+			<fileset basedir="${outputdir}/NetworkInterfaces">
+				<include name="NetworkInterfaces.*"/>
+			</fileset>
+		</copy>
+		<mkdir dir="${outputdir}/RpcProxyGenerator" />
+		<copy todir="${outputdir}/RpcProxyGenerator">
+			<fileset basedir="${outputdir}/NetworkInterfaces">
+				<include name="NetworkInterfaces.*"/>
+			</fileset>
+		</copy>
+		<nant buildfile="../RpcProxyGenerator/default.build" />
+		
+		<if test="${framework::get-runtime-engine(framework::get-target-framework()) == ''}" >
+		<exec program="${outputdir}/RpcProxyGenerator/RpcProxyGenerator.exe" 
+			output="${outputdir}/RpcProxyGenerator/generate.log"
+			workingdir="${outputdir}/RpcProxyGenerator" />			
+		</if>
+		<if test="${framework::get-runtime-engine(framework::get-target-framework()) != ''}" >
+			<exec program="${framework::get-runtime-engine(framework::get-target-framework())}" 
+				commandline="RpcProxyGenerator.exe"
+				output="${outputdir}/RpcProxyGenerator/generate.log"
+				workingdir="${outputdir}/RpcProxyGenerator" />
+		</if>
+
+		<copy todir="GeneratedProxies">
+			<fileset basedir="${outputdir}/RpcProxyGenerator">
+				<include name="LockRpcToClient_ClientProxy_Generated.cs"/>
+				<include name="LockRpcToServer_ClientProxy_Generated.cs"/>
+				<include name="ObjectReplicationClientToServer_ClientProxy_Generated.cs"/>
+				<include name="ObjectReplicationServerToClient_ClientProxy_Generated.cs"/>
+				<include name="TestInterface_ClientProxy_Generated.cs"/>
+				<include name="WorldControl_ClientProxy_Generated.cs"/>
+			</fileset>
+		</copy>
+
+		<csc target="library" output="${bindir}/Metaverse.Client.dll" debug="${debug}">
+			<references>
+				<include name="${bindir}/NetworkInterfaces.dll" />
+				<include name="${bindir}/FractalSpline.dll" />
+				<include name="${bindir}/MathGL.dll" />
+
+				<include name="${bindir}/glade-sharp.dll" if="${framework::get-target-framework()=='net-2.0'}" />
+				<include name="${bindir}/atk-sharp.dll" if="${framework::get-target-framework()=='net-2.0'}"/>
+				<include name="${bindir}/gtk-sharp.dll" if="${framework::get-target-framework()=='net-2.0'}"/>
+				<include name="${bindir}/gdk-sharp.dll" if="${framework::get-target-framework()=='net-2.0'}"/>
+				<include name="${bindir}/glib-sharp.dll" if="${framework::get-target-framework()=='net-2.0'}"/>
+
+				
+
+				<include name="${bindir}/Tao.DevIl.dll" />
+				<include name="${bindir}/Tao.FreeGlut.dll" />
+				<include name="${bindir}/Tao.OpenGl.dll" />
+				<include name="${bindir}/Tao.OpenGl.Glu.dll" />
+				<include name="${bindir}/Tao.OpenGl.ExtensionLoader.dll" />
+				<include name="${bindir}/Tao.Sdl.dll" />
+				<include name="${bindir}/SdlDotNet.dll" />
+
+				<include name="System.Drawing.dll" />
+				<include name="${bindir}/Metaverse.Utility.dll" />
+				<include name="${bindir}/Metaverse.Communication.dll" />
+				<include name="${bindir}/Metaverse.Networking.dll" />
+				<include name="${bindir}/Metaverse.Common.dll" />
+				<include name="${bindir}/Nini.dll" />
+			</references>
+			<pkg-references>
+				<package name="gtk-sharp-2.0" unless="${framework::get-target-framework()=='net-2.0'}" />
+				<package name="glade-sharp-2.0" unless="${framework::get-target-framework()=='net-2.0'}" />
+			</pkg-references>
+			<sources>
+				<include name="./MetaverseClient.cs" />
+
+				<include name="./Replication/ObjectReplicationServerToClient.cs" />
+				<include name="./Replication/ObjectReplicationClientToServer.cs" />
+				<include name="./Replication/NetObjectReferenceController.cs" />
+				<include name="./Replication/WorldReplication.cs" />
+				<include name="./Replication/NetReplicationController.cs" />
+				<include name="./Replication/DirtyObjectController.cs" />
+				<include name="./Replication/DirtyObjectQueueSingleClient.cs" />
+				<include name="./Replication/IDirtyObjectQueue.cs" />
+
+				<include name="./Server/MetaverseServer.cs" />
+				<include name="./Server/ServerRegistration.cs" />
+				<include name="./Server/QueryServer.cs" />
+
+				<include name="./MovementAndEditing/PropertyInfoClasses.cs" />
+				<include name="./MovementAndEditing/SelectionView.cs" />
+				<include name="./MovementAndEditing/Editing3dScale.cs" />
+				<include name="./MovementAndEditing/Camera.cs" />
+				<include name="./MovementAndEditing/SelectionController.cs" />
+				<include name="./MovementAndEditing/KeyHandlerQuit.cs" />
+				<include name="./MovementAndEditing/Editing3dPos.cs" />
+				<include name="./MovementAndEditing/EntityDelete.cs" />
+				<include name="./MovementAndEditing/Editing3dRot.cs" />
+				<include name="./MovementAndEditing/ViewerState.cs" />
+				<include name="./MovementAndEditing/SelectionModel.cs" />
+				<include name="./MovementAndEditing/PlayerMovement.cs" />
+				<include name="./MovementAndEditing/Editing3d.cs" />
+				<include name="./MovementAndEditing/AssignTextureHandler.cs" />
+				<include name="./MovementAndEditing/AssignColorHandler.cs" />
+
+				<include name="./MovementAndEditing/Terrain/CurrentEditBrush.cs" />
+				<include name="./MovementAndEditing/Terrain/CurrentEditSpot.cs" />
+				<include name="./MovementAndEditing/Terrain/EditingHelper.cs" />
+				<include name="./MovementAndEditing/Terrain/EditController.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushEffects/PaintTexture.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushEffects/RaiseLower.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushEffects/Flatten.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushEffects/FixedHeight.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushEffects/IBrushEffect.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushEffects/BrushEffectController.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushShapes/RoundBrush.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushShapes/IBrushShape.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushShapes/SquareBrush.cs" />
+				<include name="./MovementAndEditing/Terrain/BrushShapes/BrushShapeController.cs" />
+
+				<include name="./Persistence/IHasProperties.cs" />
+				<include name="./Persistence/IWorldPersist.cs" />
+				<include name="./Persistence/ProjectFileController.cs" />
+				<include name="./Persistence/ImportExportPrimBlender.cs" />
+				<include name="./Persistence/WorldPersistToXml.cs" />
+				<include name="./Persistence/HeightMapPersistence.cs" />
+				<include name="./Persistence/Sm3Persistence.cs" />
+
+				<include name="./KeyAndMouse/KeyCombos.cs" />
+				<include name="./KeyAndMouse/Layer2MouseEvents.cs" />
+				<include name="./KeyAndMouse/MouseCache.cs" />
+				<include name="./KeyAndMouse/KeyNameCache.cs" />
+				<include name="./KeyAndMouse/SdlKeyCache.cs" />
+				<include name="./KeyAndMouse/CommandCombos.cs" />
+				<include name="./KeyAndMouse/MouseMoveConfigMappings.cs" />
+
+				<include name="./Help/HelpAbout.cs" />
+				<include name="./Help/DumpLogfile.cs" />
+
+			
+
+			
+
+				<include name="./GeneratedProxies/TestInterface_ClientProxy_Generated.cs" />
+				<include name="./GeneratedProxies/WorldControl_ClientProxy_Generated.cs" />
+				<include name="./GeneratedProxies/ObjectReplicationClientToServer_ClientProxy_Generated.cs" />
+				<include name="./GeneratedProxies/ObjectReplicationServerToClient_ClientProxy_Generated.cs" />
+
+				<include name="./BasicTypes/Color.cs" />
+				<include name="./BasicTypes/Plane.cs" />
+				<include name="./BasicTypes/Axis.cs" />
+				<include name="./BasicTypes/Rot.cs" />
+				<include name="./BasicTypes/Vector2.cs" />
+				<include name="./BasicTypes/Vector3.cs" />
+				<include name="./BasicTypes/mvMath.cs" />
+				<include name="./BasicTypes/CustomCollections.cs" />
+
+				<include name="./WorldModel/Entity.cs" />
+				<include name="./WorldModel/EntityCreationProperties.cs" />
+				<include name="./WorldModel/Avatar.cs" />
+				<include name="./WorldModel/FractalSplinePrim.cs" />
+				<include name="./WorldModel/FractalSplineCylinder.cs" />
+				<include name="./WorldModel/WorldView.cs" />
+				<include name="./WorldModel/FractalSplineTorus.cs" />
+				<include name="./WorldModel/SimpleCube.cs" />
+				<include name="./WorldModel/EntityGroup.cs" />
+				<include name="./WorldModel/SimpleCone.cs" />
+				<include name="./WorldModel/FractalSplineBox.cs" />
+				<include name="./WorldModel/FractalSplinePrism.cs" />
+				<include name="./WorldModel/TextureController.cs" />
+				<include name="./WorldModel/Prim.cs" />
+				<include name="./WorldModel/FractalSplineTube.cs" />
+				<include name="./WorldModel/FractalSplineRing.cs" />
+				<include name="./WorldModel/WorldModel.cs" />
+
+				<include name="./WorldModel/Terrain/Model/MapTextureStageModel.cs" />
+				<include name="./WorldModel/Terrain/Model/TerrainModel.cs" />
+				
+				<include name="./WorldModel/Terrain/View/MapTextureStageView.cs" />
+				<include name="./WorldModel/Terrain/View/RenderableHeightMap.cs" />
+				<include name="./WorldModel/Terrain/View/RenderableWater.cs" />
+				<include name="./WorldModel/Terrain/View/RendererPass.cs" />
+				<include name="./WorldModel/Terrain/View/RendererTextureStage.cs" />
+				<include name="./WorldModel/Terrain/View/TerrainView.cs" />
+				
+				<include name="./Rendering/DisplayGeometryX11.cs" />
+				<include name="./Rendering/DrawAxes.cs" />
+				<include name="./Rendering/IRenderer.cs" />
+				<include name="./Rendering/GraphicsHelperGl.cs" />
+				<include name="./Rendering/GraphicsHelperFactory.cs" />
+				<include name="./Rendering/IDisplayGeometry.cs" />
+				<include name="./Rendering/DisplayGeometryWindows.cs" />
+				<include name="./Rendering/IPicker3dModel.cs" />
+				<include name="./Rendering/RendererFactory.cs" />
+				<include name="./Rendering/TextureHelper.cs" />
+				<include name="./Rendering/IGraphicsHelperFactory.cs" />
+				<include name="./Rendering/MenuHelper.cs" />
+				<include name="./Rendering/FrustrumCulling.cs" />
+				<include name="./Rendering/ITexture.cs" />
+				<include name="./Rendering/GlTexture.cs" />
+				<include name="./Rendering/GlTextureCombine.cs" />
+				<include name="./Rendering/Picker3dModelGl.cs" />
+				<include name="./Rendering/Picker3dController.cs" />
+				<include name="./Rendering/IGraphicsHelper.cs" />
+				<include name="./Rendering/DisplayGeometryFactory.cs" />
+				<include name="./Rendering/RendererSdl.cs" />
+				<include name="./Rendering/MenuController.cs" />
+				<include name="./Rendering/ImageWrapper.cs" />
+
+				<include name="./UI/ContextMenuController.cs" />
+				<include name="./UI/EmergencyDialog.cs" />
+				<include name="./UI/UIController.cs" />
+				<include name="./UI/DialogHelpers.cs" />
+				<include name="./UI/ServerInfo.cs" />
+				
+				<include name="./UI/Dialogs/UIEntitiesPropertiesDialog.cs" />
+				<include name="./UI/Dialogs/UserChatDialog.cs" />
+				<include name="./UI/Dialogs/UIContextMenu.cs" />
+				<include name="./UI/Dialogs/LoginDialog.cs" />
+				<include name="./UI/Dialogs/InputBox.cs" />
+				<include name="./UI/Dialogs/MessageBox.cs" />
+				<include name="./UI/Dialogs/ConnectToServerDialog.cs" />
+				<include name="./UI/Dialogs/ShowUsersDialog.cs" />
+				<include name="./UI/Dialogs/ShowServersDialog.cs" />
+				<include name="./UI/Dialogs/RemoteServerInfoDialog.cs" />
+				<include name="./UI/Dialogs/Terrain/MainTerrainWindow.cs" />
+				<include name="./UI/Dialogs/Terrain/LodDialog.cs" />
+				<include name="./UI/Dialogs/Terrain/HeightScaleDialog.cs" />
+				<include name="./UI/Dialogs/Terrain/MapSizeDialog.cs" />
+			</sources>
+		</csc>
+		<copy todir="${outputdir}/Metaverse.Client">
+			<fileset basedir="${bindir}">
+				<include name="*"/>
+			</fileset>
+		</copy>
+
+		<nant buildfile="../Setup/default.build" />
+	</target>
+</project>
+

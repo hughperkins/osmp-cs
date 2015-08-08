@@ -1,0 +1,277 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B43DFCEC-2F68-4108-A83C-A02A773FD8CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OSMP</RootNamespace>
+    <AssemblyName>Metaverse.Client</AssemblyName>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Outputs\net-2.0\Metaverse.Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Outputs\Metaverse.Client\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SdlDotNet, Version=4.0.2.0, Culture=neutral, PublicKeyToken=26ad4f7e10c61408">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\SdlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.XML" />
+    <Reference Include="Tao.DevIl, Version=1.6.7.0, Culture=neutral, PublicKeyToken=7ec4053013524957">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Tao.DevIl.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.FreeGlut, Version=2.2.0.0, Culture=neutral, PublicKeyToken=6e602a6ad6c0d06d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Tao.FreeGlut.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.OpenGl, Version=0.0.0.0, Culture=neutral, PublicKeyToken=1ca010269a4501ef">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Tao.OpenGl.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.OpenGl.ExtensionLoader, Version=1.5.0.3, Culture=neutral, PublicKeyToken=aaade445f4a3f192">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Tao.OpenGl.ExtensionLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.OpenGl.Glu, Version=1.5.0.3, Culture=neutral, PublicKeyToken=3661ea75021374b5">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Tao.OpenGl.Glu.dll</HintPath>
+    </Reference>
+    <Reference Include="Tao.Sdl, Version=1.2.9.1, Culture=neutral, PublicKeyToken=9c7a200e36c0094e">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Tao.Sdl.dll</HintPath>
+    </Reference>
+    <Reference Include="atk-sharp">
+      <HintPath>..\..\..\..\Mono\1.2.2\lib\mono\gac\atk-sharp\2.8.0.0__35e10195dab3c99f\atk-sharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="gtk-sharp">
+      <HintPath>..\..\..\..\Mono\1.2.2\lib\mono\gac\gtk-sharp\2.8.0.0__35e10195dab3c99f\gtk-sharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="glib-sharp">
+      <HintPath>..\..\..\..\Mono\1.2.2\lib\mono\gac\glib-sharp\2.8.0.0__35e10195dab3c99f\glib-sharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="glade-sharp">
+      <HintPath>..\..\..\..\Mono\1.2.2\lib\mono\gac\glade-sharp\2.8.0.0__35e10195dab3c99f\glade-sharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="gdk-sharp">
+      <HintPath>..\..\..\..\Mono\1.2.2\lib\mono\gac\gdk-sharp\2.8.0.0__35e10195dab3c99f\gdk-sharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Nini">
+      <HintPath>..\..\Libraries\Nini.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicTypes\Axis.cs" />
+    <Compile Include="BasicTypes\Color.cs" />
+    <Compile Include="BasicTypes\Plane.cs" />
+    <Compile Include="BasicTypes\Rot.cs" />
+    <Compile Include="BasicTypes\Vector2.cs" />
+    <Compile Include="BasicTypes\Vector3.cs" />
+    <Compile Include="Help\DumpLogfile.cs" />
+    <Compile Include="Help\HelpAbout.cs" />
+    <Compile Include="KeyAndMouse\CommandCombos.cs" />
+    <Compile Include="KeyAndMouse\KeyCombos.cs" />
+    <Compile Include="KeyAndMouse\KeyNameCache.cs" />
+    <Compile Include="KeyAndMouse\Layer2MouseEvents.cs" />
+    <Compile Include="KeyAndMouse\SdlKeyCache.cs" />
+    <Compile Include="KeyAndMouse\MouseCache.cs" />
+    <Compile Include="KeyAndMouse\MouseMoveConfigMappings.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushEffects\BrushEffectController.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushEffects\FixedHeight.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushEffects\Flatten.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushEffects\IBrushEffect.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushEffects\PaintTexture.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushEffects\RaiseLower.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushShapes\BrushShapeController.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushShapes\IBrushShape.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushShapes\RoundBrush.cs" />
+    <Compile Include="MovementAndEditing\Terrain\BrushShapes\SquareBrush.cs" />
+    <Compile Include="MovementAndEditing\Terrain\CurrentEditBrush.cs" />
+    <Compile Include="MovementAndEditing\Terrain\CurrentEditSpot.cs" />
+    <Compile Include="MovementAndEditing\Terrain\EditController.cs" />
+    <Compile Include="MovementAndEditing\Terrain\EditingHelper.cs" />
+    <Compile Include="MovementAndEditing\ViewerState.cs" />
+    <Compile Include="Persistence\HeightMapPersistence.cs" />
+    <Compile Include="Persistence\Sm3Persistence.cs" />
+    <Compile Include="Rendering\DisplayGeometryFactory.cs" />
+    <Compile Include="Rendering\DisplayGeometryWindows.cs" />
+    <Compile Include="Rendering\DisplayGeometryX11.cs" />
+    <Compile Include="Rendering\DrawAxes.cs" />
+    <Compile Include="Rendering\FrustrumCulling.cs" />
+    <Compile Include="Rendering\GlTexture.cs" />
+    <Compile Include="Rendering\GlTextureCombine.cs" />
+    <Compile Include="Rendering\IDisplayGeometry.cs" />
+    <Compile Include="Rendering\ITexture.cs" />
+    <Compile Include="Rendering\MenuController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\RendererSdl.cs" />
+    <Compile Include="Server\ServerRegistration.cs" />
+    <Compile Include="MetaverseClient.cs" />
+    <Compile Include="MovementAndEditing\AssignColorHandler.cs" />
+    <Compile Include="MovementAndEditing\AssignTextureHandler.cs" />
+    <Compile Include="MovementAndEditing\Camera.cs" />
+    <Compile Include="MovementAndEditing\Editing3d.cs" />
+    <Compile Include="MovementAndEditing\Editing3dPos.cs" />
+    <Compile Include="MovementAndEditing\Editing3dRot.cs" />
+    <Compile Include="MovementAndEditing\Editing3dScale.cs" />
+    <Compile Include="MovementAndEditing\EntityDelete.cs" />
+    <Compile Include="MovementAndEditing\KeyHandlerQuit.cs" />
+    <Compile Include="MovementAndEditing\PlayerMovement.cs" />
+    <Compile Include="MovementAndEditing\PropertyInfoClasses.cs" />
+    <Compile Include="MovementAndEditing\SelectionController.cs" />
+    <Compile Include="MovementAndEditing\SelectionModel.cs" />
+    <Compile Include="MovementAndEditing\SelectionView.cs" />
+    <Compile Include="Persistence\IHasProperties.cs" />
+    <Compile Include="Persistence\ImportExportPrimBlender.cs" />
+    <Compile Include="Persistence\IWorldPersist.cs" />
+    <Compile Include="Persistence\ProjectFileController.cs" />
+    <Compile Include="Persistence\WorldPersistToXml.cs" />
+    <Compile Include="UI\ContextMenuController.cs" />
+    <Compile Include="Rendering\GraphicsHelperFactory.cs" />
+    <Compile Include="Rendering\GraphicsHelperGl.cs" />
+    <Compile Include="Rendering\IGraphicsHelper.cs" />
+    <Compile Include="Rendering\IGraphicsHelperFactory.cs" />
+    <Compile Include="Rendering\IPicker3dModel.cs" />
+    <Compile Include="Rendering\IRenderer.cs" />
+    <Compile Include="Rendering\Picker3dController.cs" />
+    <Compile Include="Rendering\Picker3dModelGl.cs" />
+    <Compile Include="Rendering\RendererFactory.cs" />
+    <Compile Include="Rendering\TextureHelper.cs" />
+    <Compile Include="Server\MetaverseServer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\DialogHelpers.cs" />
+    <Compile Include="UI\Dialogs\ConnectToServerDialog.cs" />
+    <Compile Include="UI\Dialogs\MessageBox.cs" />
+    <Compile Include="UI\Dialogs\InputBox.cs" />
+    <Compile Include="UI\Dialogs\LoginDialog.cs" />
+    <Compile Include="UI\Dialogs\RemoteServerInfoDialog.cs" />
+    <Compile Include="UI\Dialogs\ShowServersDialog.cs" />
+    <Compile Include="UI\Dialogs\ShowUsersDialog.cs" />
+    <Compile Include="UI\Dialogs\Terrain\HeightScaleDialog.cs" />
+    <Compile Include="UI\Dialogs\Terrain\LodDialog.cs" />
+    <Compile Include="UI\Dialogs\Terrain\MainTerrainWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Dialogs\Terrain\MapSizeDialog.cs" />
+    <Compile Include="UI\Dialogs\UIContextMenu.cs" />
+    <Compile Include="UI\Dialogs\UIEntitiesPropertiesDialog.cs" />
+    <Compile Include="UI\Dialogs\UserChatDialog.cs" />
+    <Compile Include="UI\EmergencyDialog.cs" />
+    <Compile Include="UI\UIController.cs" />
+    <Compile Include="WorldModel\Avatar.cs" />
+    <Compile Include="WorldModel\Entity.cs" />
+    <Compile Include="WorldModel\EntityCreationProperties.cs" />
+    <Compile Include="WorldModel\EntityGroup.cs" />
+    <Compile Include="WorldModel\FractalSplineBox.cs" />
+    <Compile Include="WorldModel\FractalSplineCylinder.cs" />
+    <Compile Include="WorldModel\FractalSplinePrim.cs" />
+    <Compile Include="WorldModel\FractalSplinePrism.cs" />
+    <Compile Include="WorldModel\FractalSplineRing.cs" />
+    <Compile Include="WorldModel\FractalSplineTorus.cs" />
+    <Compile Include="WorldModel\FractalSplineTube.cs" />
+    <Compile Include="WorldModel\Prim.cs" />
+    <Compile Include="WorldModel\SimpleCone.cs" />
+    <Compile Include="WorldModel\SimpleCube.cs" />
+    <Compile Include="WorldModel\Terrain\Model\MapTextureStageModel.cs" />
+    <Compile Include="WorldModel\Terrain\Model\TerrainModel.cs" />
+    <Compile Include="WorldModel\Terrain\View\MapTextureStageView.cs" />
+    <Compile Include="WorldModel\Terrain\View\RenderableHeightMap.cs" />
+    <Compile Include="WorldModel\Terrain\View\RenderableWater.cs" />
+    <Compile Include="WorldModel\Terrain\View\RendererPass.cs" />
+    <Compile Include="WorldModel\Terrain\View\RendererTextureStage.cs" />
+    <Compile Include="WorldModel\Terrain\View\TerrainView.cs" />
+    <Compile Include="WorldModel\TextureController.cs" />
+    <Compile Include="WorldModel\WorldModel.cs" />
+    <Compile Include="WorldModel\WorldView.cs" />
+    <None Include="default.build" />
+    <Compile Include="BasicTypes\mvMath.cs" />
+    <Compile Include="Server\QueryServer.cs" />
+    <Compile Include="UI\ServerInfo.cs" />
+    <Compile Include="Replication\ObjectReplicationClientToServer.cs" />
+    <Compile Include="Replication\DirtyObjectController.cs" />
+    <Compile Include="Replication\NetObjectReferenceController.cs" />
+    <Compile Include="Replication\NetReplicationController.cs" />
+    <Compile Include="Replication\ObjectReplicationServerToClient.cs" />
+    <Compile Include="GeneratedProxies\WorldControl_ClientProxy_Generated.cs" />
+    <Compile Include="GeneratedProxies\ObjectReplicationClientToServer_ClientProxy_Generated.cs" />
+    <Compile Include="GeneratedProxies\ObjectReplicationServerToClient_ClientProxy_Generated.cs" />
+    <Compile Include="Replication\WorldReplication.cs" />
+    <Compile Include="Replication\DirtyObjectQueueSingleClient.cs" />
+    <Compile Include="Rendering\ImageWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FractalSpline\FractalSpline.csproj">
+      <Project>{5B709283-292D-4BE4-880E-B23C9E7FBE05}</Project>
+      <Name>FractalSpline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MathGL\MathGL.csproj">
+      <Project>{F1BF78FA-8831-4598-8AD5-40C654B12DB7}</Project>
+      <Name>MathGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkInterfaces\NetworkInterfaces.csproj">
+      <Project>{44F0885A-0270-4ACA-8A18-68A786B1E89D}</Project>
+      <Name>NetworkInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\stun4cs\stun4cs.csproj">
+      <Project>{5F1439D3-88D8-47FF-996C-8D2062AB4016}</Project>
+      <Name>stun4cs</Name>
+    </ProjectReference>
+    <Content Include="BasicTypes\Readme.txt" />
+    <Content Include="Changes.txt" />
+    <Content Include="KeyAndMouse\KeyAndMouse.txt" />
+    <Content Include="license.txt" />
+    <ProjectReference Include="..\Metaverse.Utility\Metaverse.Utility.csproj">
+      <Project>{3F3F41CF-D45F-457E-B810-078180AB68C1}</Project>
+      <Name>Metaverse.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metaverse.Communication\Metaverse.Communication.csproj">
+      <Project>{F6437A24-6FDD-4FCF-9539-0464E9560585}</Project>
+      <Name>Metaverse.Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metaverse.Networking\Metaverse.Networking.csproj">
+      <Project>{803AA6DA-CB94-442A-97F0-D6BC408C71BE}</Project>
+      <Name>Metaverse.Networking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Metaverse.Common\Metaverse.Common.csproj">
+      <Project>{8DF2285B-E8C6-4D1C-BB51-F85BBE080073}</Project>
+      <Name>Metaverse.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>rpcproxygenerator &gt; prebuild.log
+
+xcopy /d /y *_Generated.cs $(ProjectDir)GeneratedProxies &gt;&gt; prebuild.log
+
+xcopy /d /y $(ProjectDir)..\..\Libraries\*.dll $(ProjectDir)bin &gt;&gt; prebuild.log
+</PreBuildEvent>
+  </PropertyGroup>
+</Project>

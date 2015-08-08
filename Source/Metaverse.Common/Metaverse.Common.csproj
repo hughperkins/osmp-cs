@@ -1,0 +1,54 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Metaverse.Common</RootNamespace>
+    <AssemblyName>Metaverse.Common</AssemblyName>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8DF2285B-E8C6-4D1C-BB51-F85BBE080073}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\</OutputPath>
+    <Optimize>False</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <Optimize>True</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Nini">
+      <HintPath>..\..\Libraries\Nini.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IScript.cs" />
+    <Compile Include="IScriptExecutor.cs" />
+    <Compile Include="ISim.cs" />
+    <Compile Include="IMetaverseServer.cs" />
+    <Compile Include="IWorldModel.cs" />
+    <Compile Include="IClientController.cs" />
+    <Compile Include="IMetaverseController.cs" />
+    <Compile Include="ISimController.cs" />
+    <Compile Include="Controller\IPlugin.cs" />
+    <Compile Include="Controller\IPluginController.cs" />
+    <Compile Include="Controller\IClientControllers.cs" />
+    <Compile Include="Controller\IServerControllers.cs" />
+    <Compile Include="Controller\IServerController.cs" />
+    <Compile Include="Controller\IClientController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

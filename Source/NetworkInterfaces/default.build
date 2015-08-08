@@ -1,0 +1,34 @@
+<project name="NetworkInterfaces" default="build" basedir=".">
+
+	<if test="${framework::get-target-framework()=='net-2.0'}">
+		<property name="outputdir" value="../../Outputs/net-2.0"/>
+	</if>
+	<if test="${framework::get-target-framework()=='mono-2.0'}">
+		<property name="outputdir" value="../../Outputs/mono-2.0"/>
+	</if>
+
+	<target name="clean" description="remove all generated files">
+			<delete>
+				<fileset basedir="${outputdir}/NetworkInterfaces">
+					<include name="*" />
+				</fileset>
+			</delete>
+        </target>
+
+    <target name="build" description="compiles the source code">
+		<mkdir dir="${outputdir}/NetworkInterfaces" />
+        <csc target="library" output="${outputdir}/NetworkInterfaces/NetworkInterfaces.dll" debug="${debug}">
+            <references>
+            </references>
+            <sources>
+                <include name="AuthorizedTypes.cs" />
+                <include name="ILockRpcToClient.cs" />
+                <include name="ILockRpcToServer.cs" />
+                <include name="IObjectReplication.cs" />
+                <include name="IReplicated.cs" />
+                <include name="ITestInterface.cs" />
+                <include name="IWorldControl.cs" />
+            </sources>
+        </csc>
+    </target>
+</project>

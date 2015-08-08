@@ -1,0 +1,35 @@
+  <project name="Setup" default="build" basedir=".">
+	  <if test="${framework::get-target-framework()=='net-2.0'}">
+		  <property name="outputdir" value="../../Outputs/net-2.0"/>
+	  </if>
+	  <if test="${framework::get-target-framework()=='mono-2.0'}">
+		  <property name="outputdir" value="../../Outputs/mono-2.0"/>
+	  </if>
+	  
+	  <target name="build" >
+			  <copy todir="${outputdir}/Metaverse.Application">
+				  <fileset basedir="../../Libraries/win32tools">
+					  <include name="Shortcut.exe"/>
+				  </fileset>
+			  </copy>
+			  
+			  <csc target="exe" output="${outputdir}/Metaverse.Application/Setup.exe" debug="true">
+				<references>
+					<include name="System.Windows.Forms.dll" />
+					<include name="System.Drawing.dll" />
+				</references>
+                <sources>
+                    <include name="./Setup.cs" />                    
+                    <include name="./Common.cs" />
+                    <include name="./Linux/Linux.cs" />
+                    <include name="./Win32/Win32.cs" />
+                    <include name="./Win32/AddOsmpProtocol.cs" />
+                    <include name="./Win32/FileAssociations.cs" />
+					<include name="./Win32/AddShortcuts.cs" />
+
+					<include name="./HelperClasses/EnvironmentHelper.cs" />
+                </sources>
+               </csc>
+        </target>
+  </project>
+  
