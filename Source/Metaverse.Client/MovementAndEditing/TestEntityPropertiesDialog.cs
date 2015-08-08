@@ -16,7 +16,7 @@
 // You can find the licence also on the web at:
 // http://www.opensource.org/licenses/gpl-license.php
 //
-// You can contact me at hughperkins@gmail.com for more information.
+// You can contact me at hughperkins at gmail for more information.
 
 using System;
 using System.Windows.Forms;

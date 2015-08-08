@@ -39,7 +39,7 @@ Next release:
 - removed CustomCollections from Metaverse.Utility
 - migrated Arguments to use generics (Metaverse.Utility)
 - nant build files now copy debugging information to output directory
-- context menu usage corrected; alt-tabbing now works correctly between child windows (fix bug http://manageddreams.com/osmpbugs/show_bug.cgi?id=11 )
+- context menu usage corrected; alt-tabbing now works correctly between child windows (fix bug http://hughperkins.com/osmpbugs/show_bug.cgi?id=11 )
 
 Release 0.4:
 - migrated context menu to GTK#
@@ -62,7 +62,7 @@ Release 0.4:
 - corrected issue with repeated "received potential spoofed packet" when running integrated client/server
 - OSMP no longer needs working directory set to that of Metaverse.Client.exe
 - added Setup application, needs to run from same directory as Metaverse.Client.exe
-- added osmp:// protocol, so can open links like http://manageddreams.com/osmp/TestWorld/worldwithtexture.OSMP
+- added osmp:// protocol, so can open links like http://hughperkins.com/osmp/TestWorld/worldwithtexture.OSMP
 - added background loading for textures
 - added .osmp filetype, to directly open .osmp files
 - added non-modal messagebox at "UI/Dialogs/MessageBox.cs"

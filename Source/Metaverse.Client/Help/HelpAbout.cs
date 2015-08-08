@@ -42,7 +42,7 @@ namespace OSMP
         public void About( object source, ContextMenuArgs e)
         {
             //DialogHelpers.ShowInfoMessageModal(null,
-              //  "OSMP C# written by Hugh Perkins hughperkins@gmail.com"  + Environment.NewLine +
+              //  "OSMP C# written by Hugh Perkins hughperkins at gmail"  + Environment.NewLine +
                 //"Website at http://metaverse.sf.net by Zenaphex" + Environment.NewLine +
                 //"Forums designed by Nick Merrill" + Environment.NewLine +
                 //"OSMP C# based on original C++ version written by Hugh Perkins and contributed to by Jack Didgeridoo, Christopher Omega, Jorge Lima, and Carnildo" + Environment.NewLine +
@@ -50,7 +50,7 @@ namespace OSMP
                 //"OSMP C# compilation date/time: " + EnvironmentHelper.GetCompilationDateTime()
             //);
             new MessageBox(MessageBox.MessageType.Info, "About OSMP",
-                "OSMP C# written by Hugh Perkins hughperkins@gmail.com" + Environment.NewLine +
+                "OSMP C# written by Hugh Perkins hughperkins at gmail" + Environment.NewLine +
                 "Website at http://metaverse.sf.net by Zenaphex" + Environment.NewLine +
                 "Forums designed by Nick Merrill" + Environment.NewLine +
                 "OSMP C# based on original C++ version written by Hugh Perkins and contributed to by Jack Didgeridoo, Christopher Omega, Jorge Lima, and Carnildo" + Environment.NewLine +

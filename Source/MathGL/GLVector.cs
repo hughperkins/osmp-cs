@@ -1,7 +1,7 @@
  //**************************************************************************
  //*   Copyright (C) 2004,2006 by Jacques Gasselin, Hugh Perkins                     *
  //*   jacquesgasselin@hotmail.com                                           *
- //*   hughperkins@gmail.com  http://manageddreams.com     *
+ //*   hughperkins at gmail  http://hughperkins.com     *
  //*                                                                *
  //*   This program is free software; you can redistribute it and/or modify  *
  //*   it under the terms of the GNU Lesser General Public License as       *
